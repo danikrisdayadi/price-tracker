@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
-from datetime import date
+from datetime import datetime
 import csv
 
 url = "https://shopee.sg/HYDRAULIC-MONITOR-MOUNTING-ARM-NB-F80-LCD-SCREEN-DESK-TABLE-VESA-MOUNT-STAND-360-ADJUSTABLE-ROTATION-i.13842071.2689454006"
@@ -21,8 +21,10 @@ title_name = driver.find_element_by_xpath("//span[contains(text(), 'VESA MOUNT')
 product = driver.find_element_by_xpath("//button[contains(text(), 'F80')]")
 product.click()
 price = driver.find_element_by_xpath("//div[@class='_3e_UQT']")
+time_now = datetime.now()
+dt_string = time_now.strftime("%d/%m/%Y %H:%M:%S")
 
-price_list = [date.today(), title_name.text, price.text]
+price_list = [dt_string, title_name.text, price.text]
 
 with open('./price_history.csv', 'w') as f:
     writer = csv.writer(f)
