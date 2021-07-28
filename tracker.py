@@ -36,4 +36,4 @@ with open('./price_history.csv', 'a', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(price_list)
 
-driver.close()
+driver.quit()
