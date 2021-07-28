@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.by import By
@@ -8,7 +9,12 @@ import csv
 
 url = "https://shopee.sg/HYDRAULIC-MONITOR-MOUNTING-ARM-NB-F80-LCD-SCREEN-DESK-TABLE-VESA-MOUNT-STAND-360-ADJUSTABLE-ROTATION-i.13842071.2689454006"
 headers = headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36" }
-driver = webdriver.Chrome("C:\\Users\\kanis\\Documents\\Legit Stuff\\NUS\\YSI SEA\\Java Extras\\chromedriver_win32\\chromedriver.exe")
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--window-size=1920x1080")
+
+driver = webdriver.Chrome("C:\\Users\\kanis\\Documents\\Legit Stuff\\NUS\\YSI SEA\\Java Extras\\chromedriver_win32\\chromedriver.exe", chrome_options=chrome_options)
+
 driver.get(url)
 
 timeout = 3 # seconds
@@ -26,7 +32,7 @@ dt_string = time_now.strftime("%d/%m/%Y %H:%M:%S")
 
 price_list = [dt_string, title_name.text, price.text]
 
-with open('./price_history.csv', 'w') as f:
+with open('./price_history.csv', 'a', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(price_list)
 
