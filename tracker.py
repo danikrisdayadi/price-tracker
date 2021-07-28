@@ -11,9 +11,9 @@ url = "https://shopee.sg/HYDRAULIC-MONITOR-MOUNTING-ARM-NB-F80-LCD-SCREEN-DESK-T
 headers = headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36" }
 chrome_options = Options()
 chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--window-size=1920x1080")
+chrome_options.add_argument("--window-size=1920x1080")
 
-driver = webdriver.Chrome("C:\\Users\\kanis\\Documents\\Legit Stuff\\NUS\\YSI SEA\\Java Extras\\chromedriver_win32\\chromedriver.exe", chrome_options=chrome_options)
+driver = webdriver.Chrome("C:\\Users\\kanis\\Documents\\Legit Stuff\\NUS\\YSI SEA\\Java Extras\\chromedriver_win32\\chromedriver.exe", options=chrome_options)
 
 driver.get(url)
 
@@ -21,7 +21,7 @@ timeout = 3 # seconds
 try:
     myElem = WebDriverWait(driver, timeout).until(expected_conditions.presence_of_element_located((By.XPATH, "//span[contains(text(), 'VESA MOUNT')]")))
 except TimeoutException:
-    print ("Loading took too much time!")
+    print ("Timeout exceeded!")
 
 title_name = driver.find_element_by_xpath("//span[contains(text(), 'VESA MOUNT')]")
 product = driver.find_element_by_xpath("//button[contains(text(), 'F80')]")
